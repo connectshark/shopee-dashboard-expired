@@ -1,12 +1,14 @@
 {
-  "name": "vite-template",
-  "version": "0.0.0",
+  "name": "shopee-dashboard",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "vant": "^3.2.1",
     "vue": "^3.2.6",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"

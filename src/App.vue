@@ -1,5 +1,7 @@
 <template>
-  <h1 class="text-4xl">{{title}}</h1>
+  <header class="w-full py-3 bg-blue-100">
+    <h1 class="sm:text-4xl text-2xl">{{title}}</h1>
+  </header>
   <router-view></router-view>
 </template>
 
@@ -7,7 +9,7 @@
 export default {
   setup () {
     return {
-      title: 'Hello'
+      title: '蝦皮後台'
     }
   }
 }
