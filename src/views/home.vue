@@ -15,13 +15,18 @@
     @confirm="onConfirm"
     teleport="#modal"
   />
+  <List/>
 </template>
 
 <script>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import List from '../components/list.vue'
 
 export default {
+  components: {
+    List
+  },
   setup() {
     const store = useStore()
     const startTime = ref('')
@@ -30,7 +35,8 @@ export default {
 
     const formatDate = (date) => new Date(date).getTime() / 1000
     const onConfirm = (values) => {
-      const [start, end] = values;
+      const [start, end] = values
+      console.log(start, end)
       show.value = false
       startTime.value = formatDate(start)
       endTime.value = formatDate(end)
