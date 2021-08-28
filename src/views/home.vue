@@ -1,7 +1,8 @@
 <template>
   <h2 class="text-2xl">第一頁由此開始</h2>
   <div class="btn" @click="show = true">show</div>
-  <p><span>{{date}}</span></p>
+  <p><span>{{startTime}} - {{endTime}}</span></p>
+  <div class="text-2xl" @click="submit">送出</div>
   <van-calendar
     v-model:show="show"
     type="range"
@@ -14,31 +15,50 @@
     @confirm="onConfirm"
     teleport="#modal"
   />
+  <List/>
 </template>
 
 <script>
 import { ref } from 'vue'
+import { useStore } from 'vuex'
+import List from '../components/list.vue'
 
 export default {
+  components: {
+    List
+  },
   setup() {
-    const date = ref('')
+    const store = useStore()
+    const startTime = ref('')
+    const endTime = ref('')
     const show = ref(false)
 
     const formatDate = (date) => new Date(date).getTime() / 1000
     const onConfirm = (values) => {
-      const [start, end] = values;
-      show.value = false;
-      date.value = `${formatDate(start)} - ${formatDate(end)}`;
+      const [start, end] = values
+      console.log(start, end)
+      show.value = false
+      startTime.value = formatDate(start)
+      endTime.value = formatDate(end)
+    }
+
+    const submit = () => {
+      store.dispatch('searchAction', {
+        startTime: startTime.value,
+        endTime: endTime.value
+      })
     }
 
 
     return {
-      date,
       show,
       onConfirm,
       minData: new Date(2021, 0, 1),
       maxDate: new Date(),
-      defaultDate: [new Date(2021, 7, 1), new Date()]
+      defaultDate: [new Date(2021, 7, 1), new Date()],
+      submit,
+      startTime,
+      endTime
     }
   },
 };
