@@ -1,8 +1,8 @@
 <template>
-  <h2 class="text-2xl">第一頁由此開始</h2>
-  <div class="btn" @click="show = true">show</div>
-  <p><span>{{startTime}} - {{endTime}}</span></p>
-  <div class="text-2xl" @click="submit">送出</div>
+  <h2 @click="show = true" class="bg-gray-200">
+    <span class="text-xl">{{formatReadContent}}</span>
+  </h2>
+  <div class="text-2xl py-3 bg-gray-300" @click="submit">送出</div>
   <van-calendar
     v-model:show="show"
     type="range"
@@ -19,9 +19,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import List from '../components/list.vue'
+import Time from '../lib/time'
 
 export default {
   components: {
@@ -29,14 +30,14 @@ export default {
   },
   setup() {
     const store = useStore()
-    const startTime = ref('')
-    const endTime = ref('')
+    const today = new Date()
+    const startTime = ref(new Date(today.getFullYear(), today.getMonth(), 1).getTime() / 1000)
+    const endTime = ref(new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime() / 1000)
     const show = ref(false)
 
     const formatDate = (date) => new Date(date).getTime() / 1000
     const onConfirm = (values) => {
       const [start, end] = values
-      console.log(start, end)
       show.value = false
       startTime.value = formatDate(start)
       endTime.value = formatDate(end)
@@ -49,7 +50,10 @@ export default {
       })
     }
 
+    const formatReadContent = computed(() => Time.formatReadDate(startTime.value) + '~' + Time.formatReadDate(endTime.value))
 
+
+    onMounted(submit)
     return {
       show,
       onConfirm,
@@ -58,7 +62,8 @@ export default {
       defaultDate: [new Date(2021, 7, 1), new Date()],
       submit,
       startTime,
-      endTime
+      endTime,
+      formatReadContent
     }
   },
 };
