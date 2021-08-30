@@ -28,6 +28,8 @@
       :estimatedTotalCommission="order.estimatedTotalCommission"
       :orderCount="order.orderCount"
       :orders="order.list"
+      :device="order.device"
+      :utm="order.utm"
     />
   </div>
   <teleport to="#modal" v-if="modal">

@@ -3,7 +3,8 @@
 	<div class="align" @click="show = !show">
 		<div class="main">
 			<p class="row title">{{orderId}}</p>
-			<p class="row">{{time}}</p>
+			<p class="row">{{time}}<i class="bx" :class="device === 'APP' ? 'bx-mobile' : 'bx-desktop'"></i></p>
+			<p class="row">{{utm}}</p>
 		</div>
 		<div class="commission">
 			<p>${{estimatedTotalCommission}}</p>
@@ -54,6 +55,13 @@ export default {
 		},
 		orders: {
 			type: Array
+		},
+		device: {
+			type: String,
+			default: 'APP'
+		},
+		utm: {
+			type: String
 		}
 	},
 	setup (props) {

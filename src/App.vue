@@ -11,7 +11,6 @@ export default {
   },
   setup () {
     return {
-      title: '蝦皮後台'
     }
   }
 }

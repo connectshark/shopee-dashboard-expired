@@ -17,7 +17,7 @@ const store = createStore({
             modelId: item.modelId,
             qty: item.qty,
             img: item.imageUrl,
-            status: item.displayItemStatus,
+            status: item.fraudStatus,
             amount: item.actualAmount,
             price: item.itemPrice
           }
@@ -27,7 +27,9 @@ const store = createStore({
           orderId: order.checkoutId,
           estimatedTotalCommission: order.estimatedTotalCommission,
           list: list,
-          orderCount: order.orders[0].items.length
+          orderCount: order.orders[0].items.length,
+          device: order.device,
+          utm: order.utmContent
         }
       })
     }
