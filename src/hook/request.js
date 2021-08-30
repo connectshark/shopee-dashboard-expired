@@ -1,6 +1,6 @@
 import api from '../lib/api'
 
-const list = {
+const request = {
   getList (startTime, endTime) {
     return new Promise((resolve, reject) => {
       api.get('/shopeeOfferList', {
@@ -16,4 +16,4 @@ const list = {
   }
 }
 
-export default list
+export default request

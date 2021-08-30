@@ -6,8 +6,6 @@
         <i class='bx bx-search-alt'></i>
       </div>
     </div>
-    
-    
   </div>
   <van-calendar
     v-model:show="show"
@@ -32,14 +30,19 @@
       :orders="order.list"
     />
   </div>
-  
+  <teleport to="#modal" v-if="modal">
+    <div class="dialog">
+      <h2>請稍候再試</h2>
+    </div>
+  </teleport>
 </template>
 
 <script>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import Order from '../components/order.vue'
 import Time from '../lib/time'
+import request from '../hook/request'
 
 export default {
   components: {
@@ -48,6 +51,7 @@ export default {
   setup() {
     const store = useStore()
     const today = new Date()
+    const modal = ref(false)
     const startTime = ref(new Date(today.getFullYear(), today.getMonth(), 1).getTime() / 1000)
     const endTime = ref(new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime() / 1000)
     const show = ref(false)
@@ -61,11 +65,23 @@ export default {
     }
 
     const submit = () => {
-      store.dispatch('searchAction', {
-        startTime: startTime.value,
-        endTime: endTime.value
-      })
+      request.getList(startTime.value, endTime.value)
+        .then(res => {
+          if (res.data) {
+            store.commit('prodList', res.data.conversionReport.nodes)
+          } else {
+            modal.value = true
+          }
+        })
     }
+
+    watch(modal, value => {
+      if (value) {
+        setTimeout(() => {
+          modal.value = false
+        }, 3000)
+      }
+    })
 
     const formatReadContent = computed(() => Time.formatReadDate(startTime.value) + ' ~ ' + Time.formatReadDate(endTime.value))
 
@@ -82,7 +98,8 @@ export default {
       startTime,
       endTime,
       formatReadContent,
-      list
+      list,
+      modal
     }
   },
 };
@@ -125,5 +142,33 @@ export default {
 .list{
   padding: 20px 0 0;
   text-align: center;
+}
+.dialog{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  &::before{
+    content: '';
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  h2{
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    max-width: 300px;
+    background-color: #22AEEA;
+    border-radius: 10px;
+    font-size: 24px;
+    line-height: 2;
+    text-align: center;
+    color: #fff;
+  }
 }
 </style>
