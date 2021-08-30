@@ -1,7 +1,13 @@
 <template>
   <div class="card">
-    <p class="title" @click="show = true">{{formatReadContent}}</p>
-    <div class="btn" @click="submit">搜尋</div>
+    <div class="row">
+      <p class="time" @click="show = true">{{formatReadContent}}</p>
+      <div class="btn" @click="submit">
+        <i class='bx bx-search-alt'></i>
+      </div>
+    </div>
+    
+    
   </div>
   <van-calendar
     v-model:show="show"
@@ -64,7 +70,7 @@ export default {
     const formatReadContent = computed(() => Time.formatReadDate(startTime.value) + ' ~ ' + Time.formatReadDate(endTime.value))
 
 
-    // onMounted(submit)
+    onMounted(submit)
     const list = computed(() => store.getters.listFilter)
     return {
       show,
@@ -90,21 +96,31 @@ export default {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   padding: 20px;
   box-sizing: border-box;
-  .title{
-    color: #3939AF;
-    font-size: 24px;
-    line-height: 1.5;
-    margin-bottom: 10px;
+  .row{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    .time{
+      color: #3939AF;
+      font-size: 24px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 5px 20px;
+    }
+    .btn{
+      font-size: 20px;
+      line-height: 1.5;
+      background-color: #A1D5D1;
+      color: #fff;
+      width: 40px;
+      border-radius: 20px;
+    }
   }
-  .btn{
-    font-size: 20px;
-    line-height: 1.5;
-    background-color: #A1D5D1;
-    color: #fff;
-    width: 80px;
-    margin: auto;
-    border-radius: 20px;
-  }
+  
+  
 }
 .list{
   padding: 20px 0 0;
