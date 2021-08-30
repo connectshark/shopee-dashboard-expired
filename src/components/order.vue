@@ -97,6 +97,7 @@ export default {
 			width: 100%;
 			.title{
 				color: #333;
+				word-break: break-all;
 			}
 			.row{
 				padding: 5px 0;
@@ -120,12 +121,13 @@ export default {
 	}
 	.order-detail{
 		.list{
-			padding: 20px 0;
+			padding: 20px 0 0;
 			box-sizing: border-box;
 			&:not(:last-child){
 				border-bottom: 1px solid #eee;
 			}
 			.row{
+				margin-bottom: 10px;
 				.title{
 					font-size: 14px;
 					line-height: 1.1;
@@ -136,14 +138,16 @@ export default {
 				flex-flow: row nowrap;
 				align-items: center;
 				justify-content: flex-start;
+				margin-bottom: 10px;
 				.img-place{
 					width: 30px;
 				}
 				.qty{
-					margin: 0 10px;
+					margin: 0 5px;
 				}
 				.amount{
 					margin: 0 0 0 auto;
+					color: #3939AF;
 				}
 			}
 		}
