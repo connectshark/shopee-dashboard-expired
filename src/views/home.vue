@@ -23,6 +23,7 @@
       :purchaseTime="order.purchaseTime"
       :estimatedTotalCommission="order.estimatedTotalCommission"
       :orderCount="order.orderCount"
+      :orders="order.list"
     />
   </div>
   
@@ -107,5 +108,6 @@ export default {
 }
 .list{
   padding: 20px 0 0;
+  text-align: center;
 }
 </style>

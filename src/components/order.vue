@@ -1,6 +1,6 @@
 <template>
 <div class="order">
-	<div class="align">
+	<div class="align" @click="show = !show">
 		<div class="main">
 			<p class="row title">{{orderId}}</p>
 			<p class="row">{{time}}</p>
@@ -9,12 +9,35 @@
 			<p>${{estimatedTotalCommission}}</p>
 		</div>
 	</div>
-	<div class="btn">{{orderCount}}</div>
+	<div class="align" @click="show = !show">
+		<div class="icon">
+			<i class='bx' :class="show ? 'bx-folder-minus' : 'bx-folder-plus'"></i>
+		</div>
+		<div class="btn">{{orderCount}}</div>
+	</div>
+	<ul class="order-detail" v-show="show">
+		<li class="list" v-for="order in orders" :key="order.id">
+			<div class="row">
+				<p class="title">{{order.name}}</p>
+			</div>
+			<div class="detail">
+				<div class="img-place">
+					<img :src="order.img" :alt="order.name">
+				</div>
+				<p class="qty"><i class='bx bxs-offer'></i>{{order.qty}}</p>
+				<p class="qty">${{order.price}}</p>
+				<p class="amount"><i class='bx bx-check'></i>${{order.amount}}</p>
+			</div>
+			<div class="row">
+				<p><i class='bx bx-stats'></i>{{order.status}}</p>
+			</div>
+		</li>
+	</ul>
 </div>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 export default {
 	props: {
 		orderId: {
@@ -28,6 +51,9 @@ export default {
 		},
 		orderCount: {
 			type: Number
+		},
+		orders: {
+			type: Array
 		}
 	},
 	setup (props) {
@@ -35,14 +61,17 @@ export default {
 			const t = new Date(props.purchaseTime * 1000)
 			return t.getMonth() + 1 + '/' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes()
 		})
+		const show = ref(true)
 		return {
-			time
+			time,
+			show
 		}
 	}
 }
 </script>
 
 <style scoped lang="scss">
+@import '../assets/scss/media.scss';
 .order{
 	width: 90%;
 	margin: auto;
@@ -53,6 +82,12 @@ export default {
 	text-align: left;
 	margin-bottom: 20px;
 	color: #6e6e6e;
+	@include mobile {
+		width: 28%;
+		margin: 0 10px;
+		display: inline-block;
+		vertical-align: top;
+	}
 	.align{
 		display: flex;
 		flex-flow: row nowrap;
@@ -83,5 +118,39 @@ export default {
 			}
 		}
 	}
+	.order-detail{
+		.list{
+			padding: 20px 0;
+			box-sizing: border-box;
+			&:not(:last-child){
+				border-bottom: 1px solid #eee;
+			}
+			.row{
+				.title{
+					font-size: 14px;
+					line-height: 1.1;
+				}
+			}
+			.detail{
+				display: flex;
+				flex-flow: row nowrap;
+				align-items: center;
+				justify-content: flex-start;
+				.img-place{
+					width: 30px;
+				}
+				.qty{
+					margin: 0 10px;
+				}
+				.amount{
+					margin: 0 0 0 auto;
+				}
+			}
+		}
+	}
+}
+img{
+	width: 100%;
+	vertical-align: middle;
 }
 </style>
