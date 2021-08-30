@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
-import './index.css'
+import './assets/css/reset.css'
 import Calendar from 'vant/es/calendar'
 import 'vant/es/calendar/style'
 

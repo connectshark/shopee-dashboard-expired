@@ -35,7 +35,8 @@ const store = createStore({
           purchaseTime: order.purchaseTime,
           orderId: order.checkoutId,
           estimatedTotalCommission: order.estimatedTotalCommission,
-          list: list
+          list: list,
+          orderCount: order.orders[0].items.length
         }
       })
     }

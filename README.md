@@ -1,4 +1,4 @@
-# vite-template
+# shopee-dashboard
 
 快速開發模板架構
 

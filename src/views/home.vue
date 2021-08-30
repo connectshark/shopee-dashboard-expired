@@ -1,8 +1,8 @@
 <template>
-  <h2 @click="show = true" class="bg-gray-200">
-    <span class="text-xl">{{formatReadContent}}</span>
-  </h2>
-  <div class="text-2xl py-3 bg-gray-300" @click="submit">送出</div>
+  <div class="card">
+    <p class="title" @click="show = true">{{formatReadContent}}</p>
+    <div class="btn" @click="submit">搜尋</div>
+  </div>
   <van-calendar
     v-model:show="show"
     type="range"
@@ -15,18 +15,28 @@
     @confirm="onConfirm"
     teleport="#modal"
   />
-  <List/>
+  <div class="list">
+    <Order
+      v-for="order in list"
+      :key="order.orderId"
+      :orderId="order.orderId"
+      :purchaseTime="order.purchaseTime"
+      :estimatedTotalCommission="order.estimatedTotalCommission"
+      :orderCount="order.orderCount"
+    />
+  </div>
+  
 </template>
 
 <script>
 import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
-import List from '../components/list.vue'
+import Order from '../components/order.vue'
 import Time from '../lib/time'
 
 export default {
   components: {
-    List
+    Order
   },
   setup() {
     const store = useStore()
@@ -50,10 +60,11 @@ export default {
       })
     }
 
-    const formatReadContent = computed(() => Time.formatReadDate(startTime.value) + '~' + Time.formatReadDate(endTime.value))
+    const formatReadContent = computed(() => Time.formatReadDate(startTime.value) + ' ~ ' + Time.formatReadDate(endTime.value))
 
 
-    onMounted(submit)
+    // onMounted(submit)
+    const list = computed(() => store.getters.listFilter)
     return {
       show,
       onConfirm,
@@ -63,11 +74,38 @@ export default {
       submit,
       startTime,
       endTime,
-      formatReadContent
+      formatReadContent,
+      list
     }
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.card{
+  width: 90%;
+  margin: auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  box-sizing: border-box;
+  .title{
+    color: #3939AF;
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .btn{
+    font-size: 20px;
+    line-height: 1.5;
+    background-color: #A1D5D1;
+    color: #fff;
+    width: 80px;
+    margin: auto;
+    border-radius: 20px;
+  }
+}
+.list{
+  padding: 20px 0 0;
+}
 </style>

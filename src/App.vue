@@ -1,12 +1,14 @@
 <template>
-  <header class="w-full py-3 bg-blue-100">
-    <h1 class="sm:text-4xl text-2xl">{{title}}</h1>
-  </header>
+  <Head/>
   <router-view></router-view>
 </template>
 
 <script>
+import Head from './components/head.vue'
 export default {
+  components: {
+    Head
+  },
   setup () {
     return {
       title: '蝦皮後台'
@@ -16,7 +18,7 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'openhuninn', 'Noto Sans TC', sans-serif;
   text-align: center;
