@@ -52,10 +52,9 @@ export default {
   },
   setup() {
     const store = useStore()
-    const today = new Date()
     const modal = ref(false)
-    const startTime = ref(new Date(today.getFullYear(), today.getMonth(), 1).getTime() / 1000)
-    const endTime = ref(new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime() / 1000)
+    const startTime = ref(Time.getStartTime())
+    const endTime = ref(Time.getNow())
     const show = ref(false)
 
     const formatDate = (date) => new Date(date).getTime() / 1000
