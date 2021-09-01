@@ -45,13 +45,24 @@ import { useStore } from 'vuex'
 import Order from '../components/order.vue'
 import Time from '../lib/time'
 import request from '../hook/request'
+import { useRouter } from 'vue-router'
 
 export default {
   components: {
     Order
   },
   setup() {
+    const router = useRouter()
     const store = useStore()
+
+    const user = computed(() => store.state.user)
+    if (user.value === '') {
+      router.push('/login')
+    }
+
+
+
+
     const modal = ref(false)
     const startTime = ref(Time.getStartTime())
     const endTime = ref(Time.getNow())
@@ -96,8 +107,6 @@ export default {
       maxDate: new Date(),
       defaultDate: [new Date(2021, 7, 1), new Date()],
       submit,
-      startTime,
-      endTime,
       formatReadContent,
       list,
       modal

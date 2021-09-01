@@ -2,10 +2,23 @@ import { createStore } from 'vuex'
 
 const store = createStore({
   state: {
-    list: []
+    list: [],
+    email: '',
+    user: '',
+    avatar: ''
   },
   mutations: {
-    prodList: (state, list) => state.list = list 
+    prodList: (state, list) => state.list = list,
+    user: (state, data) => {
+      state.email = data.email,
+      state.user = data.name,
+      state.avatar = data.avatar
+    }
+  },
+  actions: {
+    setUser ({ commit }, data) {
+      commit('user', data.data)
+    }
   },
   getters: {
     listFilter (state) {
