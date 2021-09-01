@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <h1>{{title}}</h1>
+    <h1><router-link to="/">{{title}}</router-link></h1>
     <ul>
       <li class="link">
         <a href="https://nosegates.com/" target="_blank">Nosegates</a>
@@ -26,9 +26,11 @@ export default {
 .header{
   background-color: #555;
   h1{
-    color: #fff;
-    font-size: 30px;
-    line-height: 1.9;
+    a{
+      color: #fff;
+      font-size: 30px;
+      line-height: 1.9;
+    }
   }
   ul{
     padding: 0 0 20px;
