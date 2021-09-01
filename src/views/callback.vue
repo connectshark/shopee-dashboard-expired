@@ -1,6 +1,6 @@
 <template>
-  <p>讀取中...</p>
   <p v-if="detail">{{detail}}</p>
+  <p v-else>讀取中...<i class='bx bx-loader bx-spin' ></i></p>
 </template>
 
 <script>
