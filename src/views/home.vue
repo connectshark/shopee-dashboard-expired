@@ -3,7 +3,8 @@
     <div class="row">
       <p class="time" @click="show = true">{{formatReadContent}}</p>
       <div class="btn" @click="submit">
-        <i class='bx bx-search-alt'></i>
+        <i class='bx bx-loader-circle bx-spin' v-if="loading"></i>
+        <i class='bx bx-search-alt' v-else></i>
       </div>
     </div>
   </div>
@@ -54,6 +55,7 @@ export default {
   setup() {
     const router = useRouter()
     const store = useStore()
+    const loading = ref(false)
 
     const user = computed(() => store.state.user)
     if (user.value === '') {
@@ -77,6 +79,8 @@ export default {
     }
 
     const submit = () => {
+      if (loading.value) return
+      loading.value = true
       request.getList(startTime.value, endTime.value)
         .then(res => {
           if (res.data) {
@@ -84,6 +88,7 @@ export default {
           } else {
             modal.value = true
           }
+          loading.value = false
         })
     }
 
@@ -109,7 +114,8 @@ export default {
       submit,
       formatReadContent,
       list,
-      modal
+      modal,
+      loading
     }
   },
 };

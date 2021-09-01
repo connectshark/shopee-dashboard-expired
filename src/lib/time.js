@@ -1,7 +1,7 @@
 const Time = {
 	getNow: () => moment().format('X'),
 
-	getStartTime: () => moment().date(1).format('X'),
+	getStartTime: () => moment().subtract(30, 'd').format('X'),
 
 	formatReadDate: timeStamp => {
 		return moment(timeStamp, 'X').format('MM/DD')
