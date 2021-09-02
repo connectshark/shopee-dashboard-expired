@@ -57,8 +57,8 @@ export default {
     const store = useStore()
     const loading = ref(false)
 
-    const user = computed(() => store.state.user)
-    if (user.value === '') {
+    const email = computed(() => store.state.email)
+    if (email.value === '') {
       router.push('/login')
     }
 
@@ -81,7 +81,7 @@ export default {
     const submit = () => {
       if (loading.value) return
       loading.value = true
-      request.getList(startTime.value, endTime.value)
+      request.getList(startTime.value, endTime.value, email.value)
         .then(res => {
           if (res.data) {
             store.commit('prodList', res.data.conversionReport.nodes)

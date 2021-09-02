@@ -1,13 +1,12 @@
 import api from '../lib/api'
 
 const request = {
-  getList (startTime, endTime) {
+  getList (startTime, endTime, email) {
     return new Promise((resolve, reject) => {
-      api.get('/shopeeOfferList', {
-        params: {
-          purchase_time_s: startTime,
-          purchase_time_e: endTime
-        }
+      api.post('/shopeeOfferList', {
+        purchase_time_s: startTime,
+        purchase_time_e: endTime,
+        email
       }).then(res => {
         resolve(res.data)
       })
