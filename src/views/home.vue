@@ -1,13 +1,10 @@
 <template>
-  <div class="card">
-    <div class="row">
-      <p class="time" @click="show = true">{{formatReadContent}}</p>
-      <div class="btn" @click="submit">
-        <i class='bx bx-loader-circle bx-spin' v-if="loading"></i>
-        <i class='bx bx-search-alt' v-else></i>
-      </div>
-    </div>
-  </div>
+  <Bar
+    v-model:show="show"
+    :loading="loading"
+    :startTime="startTime"
+    :endTime="endTime"
+  />
   <van-calendar
     v-model:show="show"
     type="range"
@@ -44,13 +41,15 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import Order from '../components/order.vue'
+import Bar from '../components/bar.vue'
 import Time from '../lib/time'
 import request from '../hook/request'
 import { useRouter } from 'vue-router'
 
 export default {
   components: {
-    Order
+    Order,
+    Bar
   },
   setup() {
     const router = useRouter()
@@ -70,12 +69,11 @@ export default {
     const endTime = ref(Time.getNow())
     const show = ref(false)
 
-    const formatDate = (date) => new Date(date).getTime() / 1000
     const onConfirm = (values) => {
       const [start, end] = values
       show.value = false
-      startTime.value = formatDate(start)
-      endTime.value = formatDate(end)
+      startTime.value = Time.formatTime(start)
+      endTime.value = Time.formatTime(end)
     }
 
     const submit = () => {
@@ -100,19 +98,17 @@ export default {
       }
     })
 
-    const formatReadContent = computed(() => Time.formatReadDate(startTime.value) + ' ~ ' + Time.formatReadDate(endTime.value))
-
-
     onMounted(submit)
     const list = computed(() => store.getters.listFilter)
     return {
       show,
+      startTime,
+      endTime,
       onConfirm,
       minData: new Date(2021, 0, 1),
       maxDate: new Date(),
       defaultDate: [new Date(2021, 7, 1), new Date()],
       submit,
-      formatReadContent,
       list,
       modal,
       loading
@@ -122,41 +118,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card{
-  width: 90%;
-  margin: auto;
-  border-radius: 20px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 20px;
-  box-sizing: border-box;
-  .row{
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
-    .time{
-      color: #3939AF;
-      font-size: 24px;
-      line-height: 1.5;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-      padding: 5px 20px;
-    }
-    .btn{
-      font-size: 20px;
-      line-height: 1.5;
-      background-color: #A1D5D1;
-      color: #fff;
-      width: 40px;
-      border-radius: 20px;
-    }
-  }
-  
-  
+.home{
+  background-color: #FB5430;
 }
 .list{
-  padding: 20px 0 0;
+  padding: 20px 0 20px;
   text-align: center;
 }
 .dialog{

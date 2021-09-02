@@ -1,6 +1,6 @@
 <template>
-  <p v-if="detail">{{detail}}</p>
-  <p v-else>讀取中...<i class='bx bx-loader bx-spin' ></i></p>
+  <p v-if="detail" class="tip">{{detail}}</p>
+  <p class="loading" v-else>讀取中...<i class='bx bx-loader bx-spin' ></i></p>
 </template>
 
 <script>
@@ -41,4 +41,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tip, .loading{
+  margin-top: 30px;
+  font-size: 18px;
+}
+.tip{
+  font-weight: bold;
+}
 </style>

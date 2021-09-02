@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 import { computed, ref } from 'vue'
 export default {
 	props: {
@@ -66,8 +67,7 @@ export default {
 	},
 	setup (props) {
 		const time = computed(() => {
-			const t = new Date(props.purchaseTime * 1000)
-			return t.getMonth() + 1 + '/' + t.getDate() + ' ' + t.getHours() + ':' + t.getMinutes()
+			return dayjs.unix(props.purchaseTime).format('MM/DD HH:mm')
 		})
 		const show = ref(true)
 		return {
@@ -84,15 +84,16 @@ export default {
 	width: 90%;
 	margin: auto;
   border-radius: 20px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   padding: 20px;
   box-sizing: border-box;
 	text-align: left;
 	margin-bottom: 20px;
 	color: #6e6e6e;
+	background-color: #fff;
 	@include mobile {
 		width: 28%;
-		margin: 0 10px;
+		margin: 0 10px 20px;
 		display: inline-block;
 		vertical-align: top;
 	}
@@ -121,7 +122,7 @@ export default {
 			background-color: #F9F3EE;
 			border-radius: 50%;
 			p{
-				font-size: 18px;
+				font-size: 16px;
 				line-height: 60px;
 				color: #E4384F;
 			}
