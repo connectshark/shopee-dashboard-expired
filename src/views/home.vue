@@ -19,6 +19,7 @@
     teleport="#modal"
   />
   <div class="list">
+    <transition-group name="flip-list" tag="ul">
     <Order
       v-for="order in list"
       :key="order.orderId"
@@ -30,6 +31,7 @@
       :device="order.device"
       :utm="order.utm"
     />
+    </transition-group>
   </div>
   <teleport to="#modal" v-if="modal">
     <div class="dialog">
@@ -119,6 +121,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/scss/transition.scss';
 .home{
   background-color: #FB5430;
 }

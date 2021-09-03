@@ -3,11 +3,11 @@
 	<div class="align" @click="show = !show">
 		<div class="main">
 			<p class="row title">{{orderId}}</p>
-			<p class="row">{{time}}<i class="bx" :class="device === 'APP' ? 'bx-mobile' : 'bx-desktop'"></i></p>
-			<p class="row">{{utm}}</p>
+			<p class="row"><i class='bx bx-time' ></i>{{time}}<i class="bx" :class="device === 'APP' ? 'bx-mobile' : 'bx-desktop'"></i></p>
+			<p class="row"><i class='bx bx-purchase-tag'></i>{{utm}}</p>
 		</div>
 		<div class="commission">
-			<p>${{estimatedTotalCommission}}</p>
+			<p><i class='bx bx-wallet'></i>{{estimatedTotalCommission}}</p>
 		</div>
 	</div>
 	<div class="align" @click="show = !show">
@@ -27,7 +27,7 @@
 				</div>
 				<p class="qty"><i class='bx bxs-offer'></i>{{order.qty}}</p>
 				<p class="qty">${{order.price}}</p>
-				<p class="amount"><i class='bx bx-check'></i>${{order.amount}}</p>
+				<p class="amount"><i class='bx bx-check-circle'></i><i class='bx bx-dollar'></i>{{order.amount}}</p>
 			</div>
 			<div class="row">
 				<p><i class='bx bx-stats'></i>{{order.status}}</p>
@@ -140,6 +140,7 @@ export default {
 				.title{
 					font-size: 14px;
 					line-height: 1.1;
+					font-weight: bold;
 				}
 			}
 			.detail{

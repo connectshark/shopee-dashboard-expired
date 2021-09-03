@@ -1,10 +1,16 @@
 <template>
 <div class="bar">
   <div class="row" @click="updateShow">
-    <p class="time">{{formatReadContent}}</p>
-    <div class="btn" @click.stop="submit">
-      <i class='bx bx-loader-circle bx-spin' v-if="loading"></i>
-      <i class='bx bx-search-alt' v-else></i>
+    <p class="time"><i class='bx bx-calendar' ></i>{{formatReadContent}}</p>
+    <div class="tool">
+      <div class="btn submit" @click.stop="submit">
+        <i class='bx bx-loader-circle bx-spin' v-if="loading"></i>
+        <i class='bx bx-search-alt' v-else></i>
+      </div>
+      <div class="btn order" @click.stop="updateOrder">
+        <i class='bx bx-sort-down' v-if="orderBy"></i>
+        <i class='bx bx-sort-up' v-else></i>
+      </div>
     </div>
   </div>
 </div>
@@ -13,6 +19,7 @@
 <script>
 import { computed } from 'vue'
 import Time from '../lib/time'
+import { useStore } from 'vuex'
 export default {
   props: {
     show: {
@@ -30,19 +37,27 @@ export default {
     },
     submit: {
       type: Function
-    }
+    },
   },
   emits: ['update:show'],
   setup (props, { emit }) {
+    const store = useStore()
+    const orderBy = computed(() => store.state.orderBy)
+
     const formatReadContent = computed(() => {
       return Time.formatReadDate(props.startTime) + ' ~ ' + Time.formatReadDate(props.endTime)
     })
     const updateShow = () => {
       emit('update:show', true)
     }
+    const updateOrder = () => {
+      store.commit('changeOrderSortBy', !orderBy.value)
+    }
     return {
       updateShow,
-      formatReadContent
+      formatReadContent,
+      orderBy,
+      updateOrder
     }
   }
 }
@@ -78,6 +93,8 @@ export default {
       padding: 5px 20px;
     }
     .btn{
+      display: inline-block;
+      vertical-align: middle;
       font-size: 20px;
       line-height: 40px;
       background-color: #A1D5D1;
@@ -85,9 +102,16 @@ export default {
       width: 40px;
       border-radius: 20px;
       transition: width .3s;
+      margin: 0 5px;
       @include mobile {
         width: 80px;
       }
+    }
+    .submit{
+      background-color: #A1D5D1;
+    }
+    .order{
+      background-color: #e67eb6;
     }
   }
 }

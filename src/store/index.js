@@ -5,7 +5,8 @@ const store = createStore({
     list: [],
     email: '',
     user: '',
-    avatar: ''
+    avatar: '',
+    orderBy: true
   },
   mutations: {
     prodList: (state, list) => state.list = list,
@@ -13,7 +14,8 @@ const store = createStore({
       state.email = data.email,
       state.user = data.name,
       state.avatar = data.avatar
-    }
+    },
+    changeOrderSortBy: (state, change) => state.orderBy = change
   },
   actions: {
     setUser ({ commit }, data) {
@@ -43,6 +45,12 @@ const store = createStore({
           orderCount: order.orders[0].items.length,
           device: order.device,
           utm: order.utmContent
+        }
+      }).sort((a, b) => {
+        if (state.orderBy) {
+          return a.purchaseTime < b.purchaseTime ? 1 : -1
+        } else {
+          return a.purchaseTime > b.purchaseTime ? 1 : -1
         }
       })
     }
