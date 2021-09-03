@@ -27,6 +27,9 @@ export default {
     },
     endTime: {
       type: Number
+    },
+    submit: {
+      type: Function
     }
   },
   emits: ['update:show'],

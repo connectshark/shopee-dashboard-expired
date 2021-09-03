@@ -4,6 +4,7 @@
     :loading="loading"
     :startTime="startTime"
     :endTime="endTime"
+    :submit="submit"
   />
   <van-calendar
     v-model:show="show"
