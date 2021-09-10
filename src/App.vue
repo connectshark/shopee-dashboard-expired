@@ -36,6 +36,6 @@ export default {
   font-family: 'openhuninn', 'Noto Sans TC', sans-serif;
   text-align: center;
 	background-color: rgba(209, 250, 229, .2);
-  height: var(--vh);
+  min-height: var(--vh);
 }
 </style>
