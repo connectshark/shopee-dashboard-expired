@@ -119,6 +119,7 @@ export default {
 			flex-shrink: 0;
 			text-align: center;
 			p{
+				min-width: 30px;
 				background-color: #F9F3EE;
 				border-radius: 30px;
 				padding: 0 10px;
