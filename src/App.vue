@@ -33,7 +33,7 @@ export default {
 }
 
 #app {
-  font-family: 'openhuninn', 'Noto Sans TC', sans-serif;
+  font-family: 'Roboto Mono', monospace, 'openhuninn', 'Noto Sans TC', sans-serif;
   text-align: center;
 	background-color: rgba(209, 250, 229, .2);
   min-height: var(--vh);

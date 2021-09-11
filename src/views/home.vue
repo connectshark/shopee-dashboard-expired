@@ -30,6 +30,7 @@
       :orders="order.list"
       :device="order.device"
       :utm="order.utm"
+      :totalAmount="order.totalAmount"
     />
     </transition-group>
   </div>

@@ -97,21 +97,30 @@ export default {
       vertical-align: middle;
       font-size: 20px;
       line-height: 40px;
-      background-color: #A1D5D1;
       color: #fff;
       width: 40px;
       border-radius: 20px;
       transition: width .3s;
       margin: 0 5px;
+      cursor: pointer;
+      transition: background .3s, color .3s;
       @include mobile {
         width: 80px;
       }
     }
     .submit{
       background-color: #A1D5D1;
+      &:active{
+        background-color: #fff;
+        color: #A1D5D1;
+      }
     }
     .order{
       background-color: #e67eb6;
+      &:active{
+        background-color: #fff;
+        color: #e67eb6;
+      }
     }
   }
 }

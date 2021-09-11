@@ -10,12 +10,10 @@
 			<p><i class='bx bx-wallet'></i>{{estimatedTotalCommission}}</p>
 		</div>
 	</div>
-	<div class="align" @click="show = !show">
-		<div class="icon">
-			<i class='bx' :class="show ? 'bx-folder-minus' : 'bx-folder-plus'"></i>
-		</div>
-		<div class="btn">{{orderCount}}</div>
-	</div>
+	<p class="row" @click="show = !show">
+		<i class='bx' :class="show ? 'bx-folder-minus' : 'bx-folder-plus'"></i>{{orderCount}}
+		<i class='bx bx-package'></i><i class='bx bx-dollar'></i>{{totalAmount}}
+	</p>
 	<ul class="order-detail" v-show="show">
 		<li class="list" v-for="order in orders" :key="order.id">
 			<div class="row">
@@ -63,6 +61,9 @@ export default {
 		},
 		utm: {
 			type: String
+		},
+		totalAmount: {
+			type: Number
 		}
 	},
 	setup (props) {
@@ -116,14 +117,13 @@ export default {
 		}
 		.commission{
 			flex-shrink: 0;
-			width: 60px;
-			height: 60px;
 			text-align: center;
-			background-color: #F9F3EE;
-			border-radius: 50%;
 			p{
-				font-size: 16px;
-				line-height: 60px;
+				background-color: #F9F3EE;
+				border-radius: 30px;
+				padding: 0 10px;
+				font-size: 14px;
+				line-height: 50px;
 				color: #E4384F;
 			}
 		}

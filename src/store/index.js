@@ -37,6 +37,9 @@ const store = createStore({
             price: item.itemPrice
           }
         })
+        const totalAmount = order.orders[0].items.reduce((sum, item) => {
+          return sum + parseInt(item.actualAmount)
+        }, 0)
         return {
           purchaseTime: order.purchaseTime,
           orderId: order.checkoutId,
@@ -44,7 +47,8 @@ const store = createStore({
           list: list,
           orderCount: order.orders[0].items.length,
           device: order.device,
-          utm: order.utmContent
+          utm: order.utmContent,
+          totalAmount: totalAmount
         }
       }).sort((a, b) => {
         if (state.orderBy) {
