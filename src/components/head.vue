@@ -8,6 +8,9 @@
       <li class="link">
         <a href="https://connectshark.github.io/shopee-short-link/" target="_blank">蝦皮短網址服務</a>
       </li>
+      <li class="link">
+        <router-link to="/about">聯絡作者</router-link>
+      </li>
     </ul>
   </header>
 </template>
@@ -45,11 +48,13 @@ export default {
       &:hover{
         a{
           color: #fff;
+          text-decoration: underline;
         }
       }
       &:active{
         a{
           color: #fff;
+          text-decoration: underline;
         }
       }
     }
