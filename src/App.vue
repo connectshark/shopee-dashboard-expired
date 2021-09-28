@@ -11,31 +11,16 @@ export default {
     Head
   },
   setup () {
-    const resize = () => {
-      document.querySelector(':root').style.setProperty(`--vh`, window.innerHeight + 'px')
-    }
-    onMounted(() => {
-      window.addEventListener('resize', resize)
-      resize()
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', resize)
-    })
   }
 }
 </script>
 
 
 <style lang="scss">
-:root{
-  --vh: 100vh;
-}
-
 #app {
   font-family: 'Roboto Mono', monospace, 'openhuninn', 'Noto Sans TC', sans-serif;
   text-align: center;
 	background-color: rgba(209, 250, 229, .2);
-  min-height: var(--vh);
+  min-height: 100vh;
 }
 </style>

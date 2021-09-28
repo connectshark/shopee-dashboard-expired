@@ -2,8 +2,8 @@
 <div class="order">
 	<div class="align" @click="show = !show">
 		<div class="main">
-			<p class="row title">{{orderId}}</p>
-			<p class="row"><i class='bx bx-time' ></i>{{time}}<i class="bx" :class="device === 'APP' ? 'bx-mobile' : 'bx-desktop'"></i></p>
+			<p class="row title" title="訂單編號">{{orderId}}<i class='bx bx-copy-alt' title="copy"></i></p>
+			<p class="row"><i class='bx bx-time' title="time"></i>{{time}}<i class="bx" :class="device === 'APP' ? 'bx-mobile' : 'bx-desktop'" :title="device"></i></p>
 			<p class="row"><i class='bx bx-purchase-tag'></i>{{utm}}</p>
 		</div>
 		<div class="commission">
@@ -11,27 +11,30 @@
 		</div>
 	</div>
 	<p class="row" @click="show = !show">
-		<i class='bx' :class="show ? 'bx-folder-minus' : 'bx-folder-plus'"></i>{{orderCount}}
+		<i class='bx' :class="show ? 'bx-folder-minus' : 'bx-folder-plus'" title="訂單數量"></i>{{orderCount}}
 		<i class='bx bx-package'></i><i class='bx bx-dollar'></i>{{totalAmount}}
 	</p>
-	<ul class="order-detail" v-show="show">
-		<li class="list" v-for="order in orders" :key="order.id">
-			<div class="row">
-				<p class="title">{{order.name}}</p>
-			</div>
-			<div class="detail">
-				<div class="img-place">
-					<img :src="order.img" :alt="order.name">
+	
+	<transition name="slide-fade" mode="out-in">
+		<ul class="order-detail" v-show="show">
+			<li class="list" v-for="order in orders" :key="order.id">
+				<div class="row">
+					<p class="title">{{order.name}}</p>
 				</div>
-				<p class="qty"><i class='bx bxs-offer'></i>{{order.qty}}</p>
-				<p class="qty">${{order.price}}</p>
-				<p class="amount"><i class='bx bx-check-circle'></i><i class='bx bx-dollar'></i>{{order.amount}}</p>
-			</div>
-			<div class="row">
-				<p><i class='bx bx-stats'></i>{{order.status}}</p>
-			</div>
-		</li>
-	</ul>
+				<div class="detail">
+					<div class="img-place">
+						<img :src="order.img" :alt="order.name">
+					</div>
+					<p class="qty"><i class='bx bxs-offer'></i>{{order.qty}}</p>
+					<p class="qty">${{order.price}}</p>
+					<p class="amount"><i class='bx bx-check-circle'></i><i class='bx bx-dollar'></i>{{order.amount}}</p>
+				</div>
+				<div class="row">
+					<p><i class='bx bx-stats'></i>{{order.status}}</p>
+				</div>
+			</li>
+		</ul>
+	</transition>
 </div>
 </template>
 
@@ -81,6 +84,7 @@ export default {
 
 <style scoped lang="scss">
 @import '../assets/scss/media.scss';
+@import '../assets/scss/transition.scss';
 .order{
 	width: 90%;
 	margin: auto;
@@ -94,6 +98,7 @@ export default {
 	background-color: #fff;
 	@include mobile {
 		width: 28%;
+		max-width: 350px;
 		margin: 0 10px 20px;
 		display: inline-block;
 		vertical-align: top;
