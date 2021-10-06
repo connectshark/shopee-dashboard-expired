@@ -97,8 +97,7 @@ export default {
 	color: #6e6e6e;
 	background-color: #fff;
 	@include mobile {
-		width: 28%;
-		max-width: 350px;
+		width: 300px;
 		margin: 0 10px 20px;
 		display: inline-block;
 		vertical-align: top;
