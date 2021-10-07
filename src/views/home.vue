@@ -58,6 +58,9 @@ export default {
   setup() {
     const router = useRouter()
     const store = useStore()
+    /**
+     * 是否正等待回應
+     */
     const loading = ref(false)
 
     const email = computed(() => store.state.email)
@@ -65,12 +68,16 @@ export default {
       router.push('/login')
     }
 
-
-
-
+    /**
+     * 控制跳窗開關
+     */
     const modal = ref(false)
     const startTime = ref(Time.getStartTime())
     const endTime = ref(Time.getNow())
+    const scrollId = ref('')
+    /**
+     * 控制月曆開關
+     */
     const show = ref(false)
 
     const onConfirm = (values) => {
