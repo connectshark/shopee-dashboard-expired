@@ -6,7 +6,7 @@
         <a href="https://nosegates.com/" target="_blank">Nosegates</a>
       </li>
       <li class="link">
-        <a href="https://connectshark.github.io/shopee-short-link/" target="_blank">蝦皮短網址服務</a>
+        <a href="https://shopee.nosegates.com/" target="_blank">蝦皮短網址服務</a>
       </li>
       <li class="link">
         <router-link to="/about">聯絡作者</router-link>
