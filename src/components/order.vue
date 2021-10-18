@@ -116,7 +116,8 @@ export default {
 			.row{
 				padding: 5px 0;
 				font-size: 16px;
-				line-height: 1.1;
+				line-height: 1;
+				word-break: break-all;
 			}
 		}
 		.commission{
